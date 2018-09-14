@@ -1,4 +1,9 @@
 package com.nish.reversegeocoding.reader;
+
+import java.util.List;
+
+import com.nish.reversegeocoding.bo.LocationBO;
+
 /**
  * 
  * @author Nishanth Mathew Joy
@@ -10,5 +15,5 @@ public interface InputFileReader {
 	 * @param fileLocation
 	 * @return
 	 */
-	public String readFile(String fileLocation);
+	public List<LocationBO> readFile(String fileLocation);
 }
