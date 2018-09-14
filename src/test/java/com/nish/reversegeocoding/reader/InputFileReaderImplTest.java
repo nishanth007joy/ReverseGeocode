@@ -10,7 +10,7 @@ class InputFileReaderImplTest {
 	private InputFileReader inputFileReader = new InputFileReaderImpl();
 	@Test
 	void testReadFile() {
-		inputFileReader.readFile("src/test/resources/streetfile/input/Input.csv");
+		inputFileReader.readFile("src/test/resources/Input.csv");
 	}
 
 }
