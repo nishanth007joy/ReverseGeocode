@@ -1,5 +1,8 @@
 package com.nish.reversegeocoding.reader;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class InputFileReaderImpl implements InputFileReader{
 
 	@Override

@@ -1,5 +1,13 @@
 package com.nish.reversegeocoding.writer;
 
+import java.util.List;
+
+import com.nish.reversegeocoding.bo.LocationBO;
+
 public interface OutputFileWriter {
-	public void writeOutput(String processedFileContent);
+	/**
+	 * 
+	 * @param processedFileContent
+	 */
+	public void writeOutput(List<LocationBO> processedFileContent);
 }
