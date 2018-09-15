@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.nish.reversegeocoding.LocationFileProcessingException;
@@ -20,19 +21,20 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class OutputFileWriterImpl implements OutputFileWriter {
-
+	@Value("${input.datetime.format}")
+	private String dateTimePattern;
 	@Override
 	public void writeOutput(List<LocationBO> processedFileContent, String outputFileLocation) {
 		Path path = Paths.get(outputFileLocation);
 		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
 			String outputText = processedFileContent.stream().map(locationBO -> {
 				List<String> cswRowList = new ArrayList<>();
-				cswRowList.add(locationBO.getVehicleLocationDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+				cswRowList.add(locationBO.getVehicleLocationDateTime().format(DateTimeFormatter.ofPattern(dateTimePattern)));
 				cswRowList.add(String.valueOf(locationBO.getLatitude()));
 				cswRowList.add(String.valueOf(locationBO.getLongitude()));
 				cswRowList.add(locationBO.getTimZone());
 				cswRowList.add(
-						locationBO.getZonedVehicleLocationDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+						locationBO.getZonedVehicleLocationDateTime().toLocalDateTime().format(DateTimeFormatter.ISO_DATE_TIME));
 				return cswRowList;
 			}).map(outputLine -> String.join(",", outputLine)).collect(Collectors.joining("\n"));
 			log.info("Formatted output is {}", outputText);

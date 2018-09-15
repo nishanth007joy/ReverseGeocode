@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.nish.reversegeocoding.LocationFileProcessingException;
@@ -19,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class InputFileReaderImpl implements InputFileReader {
-
+	@Value("${input.datetime.format}")
+	private String dateTimePattern;
 	@Override
 	public List<LocationBO> readFile(String fileLocation) {
 		log.info("Entering readFile {}", fileLocation);
@@ -27,7 +29,7 @@ public class InputFileReaderImpl implements InputFileReader {
 			return stream.skip(1)
 					.map(line -> LocationBO.builder()
 							.vehicleLocationDateTime(
-									LocalDateTime.parse(line.split(",")[0], DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+									LocalDateTime.parse(line.split(",")[0], DateTimeFormatter.ofPattern(dateTimePattern)))
 							.latitude(Double.parseDouble(line.split(",")[1]))
 							.longitude(Double.parseDouble(line.split(",")[2])).build())
 					.collect(Collectors.toList());

@@ -1,6 +1,7 @@
 package com.nish.reversegeocoding.service;
 
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -33,8 +34,9 @@ public class LocationToTimezoneServiceImpl implements LocationToTimezoneService 
 		List<LocationBO> processedOut = input.stream().map(locationBO -> getTimezoneService.getTimezone(locationBO))
 				.map(locationBO -> {
 					ZoneId zoneID = ZoneId.of(locationBO.getTimZone());
-					ZonedDateTime zonedDateTime = ZonedDateTime.of(locationBO.getVehicleLocationDateTime(), zoneID);
-					log.info("Changed timezone is {}", zonedDateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+					ZonedDateTime zonedDateTime = ZonedDateTime.of(locationBO.getVehicleLocationDateTime(),ZoneOffset.UTC).withZoneSameInstant(zoneID);
+							//ZonedDateTime.of(locationBO.getVehicleLocationDateTime(), zoneID);
+					log.info("Changed timezone is {}", zonedDateTime.toLocalDateTime().format(DateTimeFormatter.ISO_DATE_TIME));
 					locationBO.setZonedVehicleLocationDateTime(zonedDateTime);
 					return locationBO;
 				}).collect(Collectors.toList());
