@@ -1,6 +1,7 @@
 package com.nish.reversegeocoding.bo;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +17,5 @@ public class LocationBO {
 	private double latitude;
 	private double longitude;
 	private String timZone;
-	private LocalDateTime localisedVehicleLocationDateTime;
+	private ZonedDateTime zonedVehicleLocationDateTime;
 }
