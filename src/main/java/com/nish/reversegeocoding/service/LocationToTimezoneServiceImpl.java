@@ -27,8 +27,8 @@ public class LocationToTimezoneServiceImpl implements LocationToTimezoneService 
 	private GetTimezoneService getTimezoneService;
 
 	@Override
-	public void convertLocationToTimezone() {
-		List<LocationBO> input = inputFileReader.readFile("./src/main/resources/Input.csv");
+	public void convertLocationToTimezone(String inputFileLocation, String outputFileLocation) {
+		List<LocationBO> input = inputFileReader.readFile(inputFileLocation);
 		log.info("input from location file is {}", input);
 		List<LocationBO> processedOut = input.stream().map(locationBO -> getTimezoneService.getTimezone(locationBO))
 				.map(locationBO -> {
@@ -38,7 +38,7 @@ public class LocationToTimezoneServiceImpl implements LocationToTimezoneService 
 					locationBO.setZonedVehicleLocationDateTime(zonedDateTime);
 					return locationBO;
 				}).collect(Collectors.toList());
-		outputFileWriter.writeOutput(processedOut);
+		outputFileWriter.writeOutput(processedOut, outputFileLocation);
 	}
 
 }

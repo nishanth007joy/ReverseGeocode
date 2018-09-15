@@ -9,5 +9,5 @@ public interface OutputFileWriter {
 	 * 
 	 * @param processedFileContent
 	 */
-	public void writeOutput(List<LocationBO> processedFileContent);
+	public void writeOutput(List<LocationBO> processedFileContent, String outputFileLocation);
 }

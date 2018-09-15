@@ -17,7 +17,9 @@ public class ReverseGeocodingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		locationToTimezoneService.convertLocationToTimezone();
+		log.info("Input file location is {}",args[0]);
+		log.info("Output file location is {}",args[1]);
+		locationToTimezoneService.convertLocationToTimezone(args[0],args[1]);
 	}
 
 	public static void main(String[] args) {

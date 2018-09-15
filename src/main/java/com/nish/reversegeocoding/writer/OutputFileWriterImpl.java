@@ -21,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 public class OutputFileWriterImpl implements OutputFileWriter {
 
 	@Override
-	public void writeOutput(List<LocationBO> processedFileContent) {
-		Path path = Paths.get("src/main/resources/output.csv");
+	public void writeOutput(List<LocationBO> processedFileContent, String outputFileLocation) {
+		Path path = Paths.get(outputFileLocation);
 		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
 			String outputText = processedFileContent.stream().map(locationBO -> {
 				List<String> cswRowList = new ArrayList<>();
