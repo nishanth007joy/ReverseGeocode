@@ -29,6 +29,21 @@ java -jar Reversegeocode-0.0.1-SNAPSHOT.jar C:\Users\nisha\Documents\GitHub\Reve
 
 Where first argument is the location of input file and second argument is location where output of processed input to be saved.
 
+## Input file sample
+
+```
+UTC Datetime,latitude,longitude
+2013-07-10T02:52:49,-44.490947,171.220966
+```
+Here first row is the header and its ignored by the program and its only for human redable header to understand csv file
+
+## Output file sample for above input
+
+```
+2013-07-10T02:52:49,-44.490947,171.220966,Pacific/Auckland,2013-07-10T02:52:49+12:00[Pacific/Auckland]
+```
+Here output file has first three columns same as input and fourth is the timezone location and fifth is the UTC time converted to timezone specific to coordinates.
+
 
 ## Authors
 
