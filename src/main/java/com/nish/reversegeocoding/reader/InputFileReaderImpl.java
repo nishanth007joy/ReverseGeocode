@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
+import com.nish.reversegeocoding.LocationFileProcessingException;
 import com.nish.reversegeocoding.bo.LocationBO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,8 @@ public class InputFileReaderImpl implements InputFileReader {
 					.collect(Collectors.toList());
 		} catch (IOException ioException) {
 			log.error("Error in reading file", ioException);
+			throw new LocationFileProcessingException("Error in reading input file", ioException);
 		}
-		return null;
 	}
 
 }

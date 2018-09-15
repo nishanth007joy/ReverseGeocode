@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.nish.reversegeocoding.bo.LocationBO;
@@ -23,8 +22,6 @@ public class GetTimezoneServiceImpl implements GetTimezoneService {
 	@Override
 	public LocationBO getTimezone(LocationBO locationBO) {
 		log.info("Entering getTimezone with locationBO {}", locationBO);
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host("api.geonames.org")
-				.path("/timezoneJSON").query("lat=[key1]").buildAndExpand(locationBO.getLatitude());
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("http://api.geonames.org/timezoneJSON");
 		builder.queryParam("lat", locationBO.getLatitude());
 		builder.queryParam("lng", locationBO.getLongitude());

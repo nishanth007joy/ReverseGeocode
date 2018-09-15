@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.nish.reversegeocoding.LocationFileProcessingException;
 import com.nish.reversegeocoding.bo.LocationBO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class OutputFileWriterImpl implements OutputFileWriter {
 			writer.flush();
 		} catch (IOException ioException) {
 			log.error("", ioException);
-
+			throw new LocationFileProcessingException("Error in writing output to file", ioException);
 		}
 	}
 
